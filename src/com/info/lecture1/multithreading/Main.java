@@ -1,42 +1,100 @@
 package com.info.lecture1.multithreading;
 
-/*
+
+import java.util.Random;
+
 public class Main {
 
-   *//* public static void main(String[] args) {
-        System.out.println(ThreadColor.ANSI_PURPLE + "Hello from the main thread.");
+    public static void main(String[] args) {
+        Message message = new Message();
+        (new Thread(new Writer(message))).start();
+        (new Thread(new Reader(message))).start();
+    }
+}
 
-        final Thread anotherThread = new AnotherThread();
-        anotherThread.setName("== Another Thread ==");
-        anotherThread.start();
+class Message {
+    private String message;
+    private boolean empty = true;
 
-        new Thread() {
-            public void run() {
-                System.out.println(ThreadColor.ANSI_GREEN + "Hello from the anonymous class thread");
+    public synchronized String read() {
+        while (empty) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+
             }
-        }.start();
 
-        Thread myRunnableThread = new Thread(new MyRunnable() {
-            @Override
-            public void run() {
-                System.out.println(ThreadColor.ANSI_RED + "Hello from the anonymous class's implementation of run()");
-                try {
-                    anotherThread.join();
-                    System.out.println(ThreadColor.ANSI_RED + "AnotherThread terminated, or timed out, so I'm running again");
-                } catch (InterruptedException e) {
-                    System.out.println(ThreadColor.ANSI_RED + "I couldn't wait after all. I was interrupted");
-                }
+        }
+        empty = true;
+        notifyAll();
+        return message;
+    }
+
+    public synchronized void write(String message) {
+        while (!empty) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+
             }
-        });
 
-        myRunnableThread.start();
+        }
+        empty = false;
+        this.message = message;
+        notifyAll();
+    }
+}
 
-        System.out.println(ThreadColor.ANSI_PURPLE + "Hello again from the main thread.");
+class Writer implements Runnable {
+    private Message message;
 
+    public Writer(Message message) {
+        this.message = message;
+    }
 
-    }*//*
-}*/
+    public void run() {
+        String messages[] = {
+                "Humpty Dumpty sat on a wall",
+                "Humpty Dumpty had a great fall",
+                "All the king's horses and all the king's men",
+                "Couldn't put Humpty together again"
+        };
 
+        Random random = new Random();
+
+        for (int i = 0; i < messages.length; i++) {
+            message.write(messages[i]);
+            try {
+                Thread.sleep(random.nextInt(2000));
+            } catch (InterruptedException e) {
+
+            }
+        }
+        message.write("Finished");
+    }
+}
+
+class Reader implements Runnable {
+    private Message message;
+
+    public Reader(Message message) {
+        this.message = message;
+    }
+
+    public void run() {
+        Random random = new Random();
+        for (String latestMessage = message.read(); !latestMessage.equals("Finished");
+             latestMessage = message.read()) {
+            System.out.println(latestMessage);
+            try {
+                Thread.sleep(random.nextInt(2000));
+            } catch (InterruptedException e) {
+
+            }
+        }
+    }
+}
+/*
 public class Main {
 
     public static void main(String[] args) {
@@ -47,9 +105,6 @@ public class Main {
         CountdownThread t2 = new CountdownThread(countdown);
         t2.setName("Thread 2");
 
-        /*
-            all (instance variables) are manipulated at the same time
-         */
         t1.start();
         t2.start();
     }
@@ -73,9 +128,10 @@ class Countdown {
                 color = ThreadColor.ANSI_GREEN;
         }
 
-
-        for (i=10; i > 0; i--) {
-            System.out.println(color + Thread.currentThread().getName() + ": i =" + i);
+        synchronized (this) {
+            for (i = 10; i > 0; i--) {
+                System.out.println(color + Thread.currentThread().getName() + ": i =" + i);
+            }
         }
     }
 }
@@ -92,3 +148,4 @@ class CountdownThread extends Thread {
 
     }
 }
+*/

@@ -42,7 +42,7 @@ public class Student{
 
         Student student = (Student) o;
 
-        return studentId.equals(student.studentId) &&
+        return
                 studentName.equals(student.studentName);
     }
 
