@@ -51,5 +51,11 @@ public class Student{
         return Objects.hash(studentId, studentName);
     }
 
-
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                '}';
+    }
 }
