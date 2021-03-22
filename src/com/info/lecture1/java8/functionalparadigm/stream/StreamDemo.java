@@ -1,12 +1,12 @@
 package com.info.lecture1.java8.functionalparadigm.stream;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,6 +15,23 @@ public class StreamDemo {
     public static void main(String[] args) {
 
 
+        HashSet<Employee> employeeHashMap = new HashSet<>();
+
+        employeeHashMap.add(new Employee(123, "ravi", 2300.00, 28.0));
+        employeeHashMap.add(new Employee(123, "ravi", 2300.00, 28.0));
+        employeeHashMap.add(new Employee(123, "ravi", 2300.00, 28.0));
+
+        System.out.println(employeeHashMap);
+
+        String str = "Tesing";
+
+        if (str == "Tesing") {
+            System.out.println(str);
+        }
+
+        if (str.equals("Tesing")) {
+            System.out.println(str + "::" + true);
+        }
 
   /*      List<StreamingDynamic> streamDemos = new ArrayList<>();
         streamDemos.add(new StreamingDynamic(80.0, 7, 400.00, 1000.00, 4000));
@@ -39,30 +56,31 @@ public class StreamDemo {
             }
         });
 */
-      //  System.out.println(streamDemos);
+        //  System.out.println(streamDemos);
 
         String fileName = "/Users/raviteja/Desktop/assignments/Lecture1/src/com/info/lecture1/java8/functionalparadigm/stream/lines.csv";
 
         //read file into stream, try-with-resources
 
+
         List<Employee> employee = new ArrayList<>();
+
+        // try with resources
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
 
-           employee = stream.map(x -> mapToObject(x)).filter(x -> x.getEmpSalary() >= 3000)
+            employee = stream.map(x -> readFromFile(x)).filter(x -> x.getEmpSalary() >= 3000)
                     .filter(x -> x.getEmpAge() > 25).collect(Collectors.toList());
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
-
         System.out.println("After Streams---------" + employee);
 
 
     }
 
-    private static Employee mapToObject(String x) {
+    private static Employee readFromFile(String x) {
         String[] vals = x.split(",");
 
         return new Employee(Integer.valueOf(vals[0]), vals[1], Double.valueOf(vals[2]), Double.valueOf(vals[3]));
@@ -71,7 +89,7 @@ public class StreamDemo {
 }
 
 
-class Employee{
+class Employee {
     int empId;
     String empName;
 
@@ -127,9 +145,26 @@ class Employee{
                 ", empAge=" + empAge +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return empId == employee.empId &&
+                Objects.equals(empName, employee.empName) &&
+                Objects.equals(empSalary, employee.empSalary) &&
+                Objects.equals(empAge, employee.empAge);
+    }
+
+    @Override
+    public int hashCode() {
+        Random random = new Random();
+        return random.nextInt();
+    }
 }
 
-class StreamingDynamic{
+class StreamingDynamic {
 
     Double amountofData;
     Integer internetSpeed;
@@ -250,5 +285,83 @@ class Solution {
 
 
 }
+
+
+class Main {
+    public static class FileSystem {
+        static void delete(Long file) {
+            System.out.println("Deleting " + file);
+        }
+    }
+
+    public static void cleanUp(List<Long> files, int N) {
+
+        Collections.sort(files);
+
+        for (int i = 0; i < files.size(); i++) {
+
+            if (i >= (files.size() - 3)) {
+                //  files.remove(i);
+                FileSystem.delete(files.get(i));
+            }
+
+        }
+
+
+    }
+
+    public static void main(String[] args) {
+        cleanUp(new ArrayList(Arrays.asList(1L, 3L, 5L, 7L, 9L, 2L, 18L, 4L, 100L, 50L, 3L)), 3);
+    }
+}
+// Java program to find n'th
+// term in look and say sequence
+
+class GFG {
+
+    static String lookAndSay(int l, int k) {
+        if(k == 1) return ""+ l;
+
+        if(k ==  2) return 1+""+l;
+
+        String str = 1 + "" + l;
+
+        for (int i = 3; i <= k; i++) {
+            str += '$';
+            int len = str.length();
+
+            int cnt = 1;
+
+            String tmp = "";
+
+            char[] arr = str.toCharArray();
+
+            for (int j = 1; j < len; j++) {
+                if (arr[j] != arr[j - 1]) {
+
+                    tmp += cnt + 0;
+
+
+                    tmp += arr[j - 1];
+
+                    cnt = 1;
+                } else cnt++;
+            }
+
+            str = tmp;
+        }
+
+        return str;
+    }
+
+    // Driver Code
+    public static void main(String[] args) {
+        int N = 3;
+        System.out.println(lookAndSay(4, 3));
+    }
+}
+
+
+
 
 
