@@ -1,6 +1,9 @@
 package com.info.lecture1;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 class QItem {
 

@@ -2,7 +2,6 @@ package com.info.lecture1;
 
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class Student{
 

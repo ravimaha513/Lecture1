@@ -1,7 +1,5 @@
 package com.info.lecture1;
 
-import java.util.Scanner;
-
 public class Trojan {
 
     public static void main(String[] args) {

@@ -2,9 +2,7 @@ package com.info.lecture1;
 
 import com.info.lecture1.interfaces.IInitialization;
 import com.info.lecture1.interfaces.IStudentRepository;
-import com.info.lecture1.interfaces.Impl.CassandraRepository;
 import com.info.lecture1.interfaces.Impl.InitializationImpl;
-import com.info.lecture1.interfaces.Impl.OracleRepository;
 
 import java.util.HashMap;
 import java.util.Map;

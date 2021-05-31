@@ -1,12 +1,5 @@
-import java.util.*;
 import java.math.BigDecimal;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.math.BigDecimal.ZERO;
-import static java.util.stream.Collectors.averagingDouble;
-import static java.util.stream.Collectors.groupingBy;
+import java.util.Optional;
 
 class SamplePreprocessor {
 

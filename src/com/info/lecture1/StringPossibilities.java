@@ -1,6 +1,6 @@
 package com.info.lecture1;
 
-import java.util.*;
+import java.util.Arrays;
 
 public class StringPossibilities {
 

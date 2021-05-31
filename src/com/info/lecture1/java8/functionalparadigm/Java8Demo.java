@@ -1,6 +1,5 @@
 package com.info.lecture1.java8.functionalparadigm;
 
-import java.io.CharArrayReader;
 import java.util.*;
 
 
@@ -12,7 +11,7 @@ class TestAbstract {
     //   int result = possibleTransformations("abba", new String[]{"aadd", "abbb", "dnnd", "lbbl"});
 
        //aabbcdbb
-        int result = 0;
+
 
       /*  result = possibleTransformations("aabbcdbb", new String[]{"aabbcdbbb",
                 "aabbcdb",
@@ -29,6 +28,8 @@ class TestAbstract {
         System.out.println(numbersList);
 
         String line = "195";
+
+        int result = 0;
         StringBuilder stringBuilder = new StringBuilder(line);
         Integer number = Integer.valueOf(stringBuilder.toString());
         Integer revNum = Integer.valueOf(stringBuilder.reverse().toString());

@@ -1,9 +1,10 @@
 package com.info.lecture1.collections;
 
-import com.info.lecture1.Student;
-
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 
 public class CustomMapImpl {

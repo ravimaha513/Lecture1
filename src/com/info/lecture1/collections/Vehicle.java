@@ -1,9 +1,7 @@
 package com.info.lecture1.collections;
 
 import javax.security.auth.Subject;
-import java.security.AccessControlContext;
 import java.security.AccessController;
-import java.security.Permission;
 import java.security.Principal;
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -14,7 +12,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Vehicle {
