@@ -12,13 +12,42 @@ public class TwoD {
         String a = "2134";
         String b = new String("2134");
 
-        System.out.println(a.equals(b));
+      //  System.out.println(a.equals(b));
 
+        System.out.println(isPalindrome("List"));
         
+    }
+
+    public static boolean isPalindrome(String text) {
+        // white space removal
+        text = text.trim().replaceAll(" ", "").toLowerCase();
+
+        System.out.println(text);
+        StringBuilder sbr = new StringBuilder(text);
+
+        return text.equals(sbr.reverse().toString());
+
     }
 
 
 }
+
+ class TestClass {
+    public final int value = 4;
+    public void doIt() {
+        int value = 6;
+        Runnable r = new Runnable() {
+            public final int value = 5;
+            public void run(){
+                int value = 10;
+                System.out.println(this.value);
+            }
+        };
+        r.run();
+    } public static void main(String...args) {
+        TestClass m = new TestClass();
+        m.doIt();
+    }}
 
 
 class t1{
@@ -328,7 +357,45 @@ class Solution2 {
 
 }
 
+class TreeNode {
 
+    public static void main(String[] args) {
+        String a1 = "a";
+        String a2 = "a";
+        String a3 = new String("a");
+
+        System.out.println(a1 == a2); // false
+        System.out.println(a1 == a3); // false
+        System.out.println(a1.equals(a3)); // true
+        System.out.println(calculateAverage(Arrays.asList(5.6, 5.8)));
+    }
+
+    public static double calculateAverage(List<Double> x) {
+        double sum = 0;
+        for (double i: x) {
+            sum += i;
+        }
+        return Math.round(sum / x.size());
+    }
+    public static String removeDuplicates(String s, int k) {
+        StringBuilder sb = new StringBuilder(s);
+        Stack<Integer> counts = new Stack<>();
+        for (int i = 0; i < sb.length(); ++i) {
+            if (i == 0 || sb.charAt(i) != sb.charAt(i - 1)) {
+                counts.push(1);
+            } else {
+                int incremented = counts.pop() + 1;
+                if (incremented == k) {
+                    sb.delete(i - k + 1, i + 1);
+                    i = i - k;
+                } else {
+                    counts.push(incremented);
+                }
+            }
+        }
+        return sb.toString();
+    }
+}
 
 /*
 

@@ -1,13 +1,49 @@
 package com.leetcode.problems;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class OrangesRotting {
 
     public static void main(String[] args) {
 
+        ArrayList<String> stringArrayList = new ArrayList<>();
+
+      //  Map<String, String> stringMap = stringArrayList.stream().map(Collectors.toMap(Function.identity(), String::toString));
 
     }
+
+    public static String RemoveEvenOccurrences(String inputStr) {
+
+        Map<Character, Integer> characters = new LinkedHashMap<>();
+
+        Optional<Integer> optInt = null;
+
+
+        StringBuilder sbr = new StringBuilder();
+
+
+
+        for(int i = 0; i < inputStr.length(); i++){
+            char ch = inputStr.charAt(i);
+            int val = 1;
+            if(characters.containsKey(ch)){
+                val = characters.get(ch);
+                val++;
+                if(val % 2 != 0){
+                    sbr.append(ch);
+                }
+
+            }
+
+            characters.put(ch, val);
+        }
+
+        return sbr.toString();
+
+    }
+
 
     // [[2,1,1],
     // [1,1,0],
@@ -137,3 +173,53 @@ class Main {
 }
 
 
+
+
+class Stack {
+
+    private List<Integer> elements;
+
+    private int top;
+
+    Stack() {
+
+      //  arr = new int[size];
+        elements = new LinkedList<>();
+        top = -1;
+    }
+
+    public void push(int x) {
+
+        System.out.println("Inserting " + x);
+        x = elements.get(top);
+        top++;
+    }
+
+
+    public int pop() {
+        return elements.get(top--);
+        //top--;
+    }
+
+    public void printStack() {
+        for (int i = 0; i <= top; i++) {
+            System.out.print(elements.get(i) + ", ");
+        }
+    }
+
+    public static void main(String[] args) {
+        Stack stack = new Stack();
+
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        System.out.print("Stack: ");
+        stack.printStack();
+
+        stack.pop();
+        System.out.println("\nAfter popping out");
+        stack.printStack();
+
+    }
+}
